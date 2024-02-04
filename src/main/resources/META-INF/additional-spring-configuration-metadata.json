@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "validation.password.level",
+    "type": "java.lang.String",
+    "description": "Especifica el nivel de validación para las contraseñas. Esta propiedad se utiliza para determinar los requisitos de complejidad que deben cumplir las contraseñas de usuario. Los niveles de validación incluyen "NONE" (sin requisitos específicos), "LOW" (longitud mínima), "MEDIUM" (longitud mínima, al menos una letra minúscula, una letra mayúscula y un dígito) y "HIGH" (longitud mínima, al menos una letra minúscula, una letra mayúscula, un dígito y un carácter especial)."
+  },
+  {
+    "name": "validation.password.level",
+    "type": "java.lang.String",
+    "description": "Especifica el nivel de validación para las contraseñas. Esta propiedad se utiliza para determinar los requisitos de complejidad que deben cumplir las contraseñas de usuario. Los niveles de validación incluyen "NONE" (sin requisitos específicos), "LOW" (longitud mínima), "MEDIUM" (longitud mínima, al menos una letra minúscula, una letra mayúscula y un dígito) y "HIGH" (longitud mínima, al menos una letra minúscula, una letra mayúscula, un dígito y un carácter especial)."
+  }
+]}
