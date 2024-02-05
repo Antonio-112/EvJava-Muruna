@@ -1,5 +1,5 @@
 # EvJava-Muruna
-<h1 align="center">EvaluacionJavaAutenticacionRegistroUsuarios</h1>
+<h1 align="center">EvaluacionJavaRegistroUsuarios</h1>
 <!-- descripcion  -->
 <p>Este repositorio contiene el código fuente y los recursos asociados a una prueba técnica centrada en la implementación de un sistema de registro de usuarios en Java con SpringBoot.</p>
 <!--  -->
