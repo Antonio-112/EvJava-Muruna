@@ -1,7 +1,7 @@
 # EvJava-Muruna
-<h1 align="center">EvaluacionJavaAutenticacionRegistroUsuarios</h1>
+<h1 align="center">EvaluacionJavaRegistroUsuarios</h1>
 <!-- descripcion  -->
-<p>Este repositorio contiene el código fuente y los recursos asociados a una prueba técnica centrada en la implementación de un sistema de autenticación y registro de usuarios en Java con SpringBoot.</p>
+<p>Este repositorio contiene el código fuente y los recursos asociados a una prueba técnica centrada en la implementación de un sistema de registro de usuarios en Java con SpringBoot.</p>
 <!--  -->
 <br>
 <!-- Indice -->
@@ -47,11 +47,13 @@ src/
 │   │           ├── controller/
 │   │           │   <i># Controladores para la gestión de autenticación y registro</i>
 │   │           ├── model/
-│   │           │   <i># Modelos de datos para usuarios, sesiones, etc.</i>
+│   │           │   <i># Modelos de datos para usuarios, sesiones, respuestas, etc.</i>
 │   │           ├── repository/
 │   │           │   <i># Interfaces de repositorio para la persistencia de datos</i>
-│   │           └── service/
-│   │               <i># Lógica de negocio y servicios para autenticación y registro</i>
+│   │           ├── service/
+│   │           │   <i># Lógica de negocio y servicios para autenticación y registro</i>
+│   │           └── utils/
+│   │               <i># Metodos utiles, como mappers de clases, validaciones personalizadas </i>
 │   └── resources/
 │       └── application.properties <i># Configuración de la aplicación, incluyendo la configuración de la base de datos</i>
 ├── test/
@@ -64,7 +66,7 @@ src/
 <br>
 <!-- Recursos -->
 <h2 id="recursos" align="center">Recursos</h2>
-<p>Dentro de la carpeta "recursos", ubicada en la raíz del proyecto, encontrarás tanto la estructura de carpetas del mismo como la documentación Swagger detallada sobre la implementación de la autenticación y el registro.</p>
+<p>Dentro de la carpeta "recursos", ubicada en la raíz del proyecto, encontrarás tanto la estructura de carpetas del mismo como la documentación Swagger detallada sobre la implementación del registro, una coleccion postman para la prueba de endpoints y un diagrama sencillo uml</p>
 <!--  -->
 <br>
 <!-- Instalación -->
@@ -77,14 +79,14 @@ src/
 <ol start="2">
     <li>Cambie al directorio del proyecto:</li>
 </ol>
-<pre><code>cd EvaluacionJavaAutenticacionRegistroUsuarios</code></pre>
+<pre><code>cd EvaluacionJavaRegistroUsuarios</code></pre>
 <ol start="3">
     <li>Construya el proyecto utilizando Gradle o Maven:</li>
 </ol>
 <pre><code>gradle build</code></pre>
 <p>o</p>
 <pre><code>mvn clean install</code></pre>
-<p>Asegúrese de configurar la base de datos según las especificaciones del archivo <code>application.properties</code>.</p>
+<p>Asegúrese de configurar la base de datos según las especificaciones del archivo <code>application.properties</code>, en este caso se utiliza una base de datos en memoria H2</p>
 <!--  -->
 <br>
 <!-- Desarrollo -->
