@@ -12,7 +12,6 @@ import jakarta.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +31,6 @@ public class UserController {
     private final DtoMapper dtoMapper;
     private final PasswordChecker passwordChecker;
 
-    @Autowired
     public UserController(UserService userService, DtoMapper dtoMapper, PasswordChecker passChecker) {
         this.userService = userService;
         this.dtoMapper = dtoMapper;
@@ -50,14 +48,6 @@ public class UserController {
     public ResponseEntity<ApiResponse<?>> createUser(@Valid() @RequestBody CreateUserDto userDto ) {
         User user = this.dtoMapper.mapToUser(userDto);
         
-        // Verificacion de retorno de metodo
-        // System.out.println(userService.checkEmail(user.getId(), user.getEmail()));
-        
-        if(userService.checkEmail(user.getId(), user.getEmail())) {
-            logger.warn("El correo ya está registrado: {}", user.getEmail());
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponse<>("El correo ya está registrado", null));
-        }
-        
         boolean isPasswordValid = passwordChecker.passwordTest(user.getPassword());
         
         if (!isPasswordValid) {
@@ -66,9 +56,19 @@ public class UserController {
                     .body(new ApiResponse<>("La contraseña no cumple con los requisitos", null));
         }
         
-        CreateResponse response = userService.createUser(user);
+        if(userService.checkEmail(user.getId(), user.getEmail())) {
+            logger.warn("El correo ya está registrado: {}", user.getEmail());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponse<>("El correo ya está registrado", null));
+        }
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>("User created successfully", response));
+        try {
+            CreateResponse response = userService.createUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>("User created successfully", response));
+        } catch (Exception e) {
+            logger.error("Error creating user", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse<>("Error creating user. Please try again later.", null));
+        }
     }
     
 }
