@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: Evaluacion SpringBoot API
+  version: 1.0.0
+
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        mensaje:
+          type: string
+        data:
+          $ref: '#/components/schemas/CreateResponse'
+
+    # Se utiliza String pero deberia devolver tipos de datos acorde a lo estipulado en el modelo
+    CreateResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        modified:
+          type: string
+        last_login:
+          type: string
+        token:
+          type: string
+        isActive:
+          type: boolean
+
+    PhoneDto:
+      type: object
+      properties:
+        number:
+          type: string
+        citycode:
+          type: string
+        contrycode:
+          type: string
+
+    CreateUserDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Nombre del usuario."
+        email:
+          type: string
+          description: "Correo electrónico del usuario. Debe seguir el formato aaaaaaa@dominio.cl."
+        password:
+          type: string
+          description: "Contraseña del usuario, validada por RegEx"
+        phones:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneDto'
+          description: "Listado de objetos teléfono que incluye número, código de ciudad y código de país."
+
+paths:
+  /healthCheck:
+    get:
+      summary: Health Check
+      responses:
+        '200':
+          description: OK
+
+  /user:
+    post:
+      summary: Crear Usuario
+      description: "Crea un nuevo usuario con los campos proporcionados."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserDto'
+      responses:
+        '201':
+          description: Usuario creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '409':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                mensaje: "El correo ya registrado"
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              example:
+                mensaje: "La contraseña no cumple con los requisitos"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                mensaje: "Error creating user. Please try again later."
